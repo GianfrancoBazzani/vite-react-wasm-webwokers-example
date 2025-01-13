@@ -1,50 +1,15 @@
-# React + TypeScript + Vite
+# minimal reproducible example  of [vite#19194](https://github.com/vitejs/vite/issues/19194)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Steps to reproduce
 
-Currently, two official plugins are available:
+1. clone [GianfrancoBazzani/vite-react-wasm-webwokers-example](https://github.com/GianfrancoBazzani/vite-react-wasm-webwokers-example)
+2. `cd vite-react-wasm-webwokers-example`
+3. `nvm use` to ensure node v20.18.0
+4. `yarn` to install deps
+5. `yarn build-wasm-worker` to build the wasm worker and the js bidings
+6. `yarn build` to build the production page
+7. `yarn dev` to start the dev server at http://localhost:5173/
+8. `yarn preview` to start production preview at http://localhost:4173/
+9. Press Greet from worker in both instances, you will see that in dev server the wasm worker is returning the string "Hello from the web worker!" while in prod is not  :(.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+![image](https://github.com/user-attachments/assets/cc5dd46a-c12f-4fd6-8b23-6be0ba1a65e5)
