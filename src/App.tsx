@@ -3,11 +3,11 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import type { WorkerInputs, WorkerOutputs } from "./lib/web-worker/worker.ts";
 import { WorkerState } from "./lib/web-worker/worker.ts";
+import minerWorker from  "./lib/web-worker/worker.ts?worker";
 
 function App() {
   function greetFromWorker() {
-    const url = new URL("./lib/web-worker/worker.ts", import.meta.url);
-    const worker = new Worker(url, { type: "module" });
+    const worker = new minerWorker();
 
     worker.postMessage({ initialize: true } as WorkerInputs);
 
